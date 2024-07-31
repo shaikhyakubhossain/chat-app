@@ -1,19 +1,41 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import styles from './main-chat.module.scss'
+import styles from './main-chat.module.scss';
+
+
+let shouldSetupSocket = true;
 
 export default function MainChat(): JSX.Element {
 
     const [ws, setWs] = useState<WebSocket | null>(null);
-    const [serverMessage, setServerMessage] = useState<string[]>(["hi"]);
+    const [serverMessage, setServerMessage] = useState<string[]>([]);
 
     const messageOutputRef = useRef<null | HTMLDivElement>(null);
     const inputRef = useRef<null | HTMLInputElement>(null);
 
+    let socket: WebSocket;
+
     useEffect(() => {
 
-        const socket = new WebSocket("ws://localhost:4000");
+        console.log("useEffect");
 
+        shouldSetupSocket && setupSocket();
+        shouldSetupSocket = false;
+
+        return () => {
+        console.log("useEffectReturn");
+        ws && socket.close();
+        }
+        
+
+    }, []);
+
+    const setupSocket = () => {
+
+    socket = new WebSocket("ws://localhost:4000");
+
+
+        console.log('setupSocket');
         socket.onopen = () => {
             console.log("Connected to the server");
             setWs(socket);
@@ -29,12 +51,7 @@ export default function MainChat(): JSX.Element {
             console.log("Disconnected from the server");
         }
 
-        return () => {
-            socket.close();
-        }
-        
-
-    }, []);
+    }
 
 
     const sendMessage = () => {
@@ -48,16 +65,16 @@ export default function MainChat(): JSX.Element {
     }
 
     return (
-        <div className={`${styles.mainContainer} text-center`}>
-            <h1>Main Chat</h1>
-            <div ref={messageOutputRef} className={`${styles.messageOutput} `}>
+        <div className={`${styles.mainContainer} text-center w-1/3 mx-auto`}>
+            <h1 className="text-3xl font-bold">Main Chat</h1>
+            <div ref={messageOutputRef} className={`${styles.messageOutput} h-64 mx-auto bg-gray-400 overflow-hidden s text-2xl`}>
                 {
                     serverMessage.map((item, index):JSX.Element => {
                         return <div key={index}>{item}</div>
                     })
                 }
             </div>
-            <div className='flex justify-center'>
+            <div className='flex justify-center '>
                 <div>
                     <input ref={inputRef} className={`${styles.messageInput} h-12 text-black`} type="text" placeholder="Enter message..."/>
                 </div>
