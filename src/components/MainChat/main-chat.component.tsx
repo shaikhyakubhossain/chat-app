@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import styles from './main-chat.module.scss';
+import ChatBox from "../ChatBox/chat-box.component";
 
 
 type webSocketDateType = { type: string, data: string, client: string };
@@ -14,7 +15,7 @@ export default function MainChat(): JSX.Element {
     const [ws, setWs] = useState<WebSocket | null>(null);
     const [serverMessage, setServerMessage] = useState<serverMessageType[]>([]);
 
-    const messageOutputRef = useRef<null | HTMLDivElement>(null);
+    // const messageOutputRef = useRef<null | HTMLDivElement>(null);
     const inputRef = useRef<null | HTMLInputElement>(null);
 
     let socket: WebSocket;
@@ -78,13 +79,7 @@ export default function MainChat(): JSX.Element {
     return (
         <div className={`${styles.mainContainer} text-center w-1/3 mx-auto`}>
             <h1 className="text-3xl font-bold">Main Chat</h1>
-            <div ref={messageOutputRef} className={`${styles.messageOutput} flex flex-col justify-end h-64 mx-auto bg-gray-400 overflow-auto inset-0 s text-2xl`}>
-                {
-                    serverMessage.map((item, index):JSX.Element => {
-                        return <div key={index} className=" text-right">{item.sentBy + ": " + item.message}</div>
-                    })
-                }
-            </div>
+            <ChatBox serverMessage={serverMessage} />
             <div className='flex justify-center '>
                 <div>
                     <input ref={inputRef} className={`${styles.messageInput} h-12 text-black`} type="text" placeholder="Enter message..."/>
