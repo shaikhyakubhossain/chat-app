@@ -67,10 +67,10 @@ export default function MainChat(): JSX.Element {
     return (
         <div className={`${styles.mainContainer} text-center w-1/3 mx-auto`}>
             <h1 className="text-3xl font-bold">Main Chat</h1>
-            <div ref={messageOutputRef} className={`${styles.messageOutput} h-64 mx-auto bg-gray-400 overflow-hidden s text-2xl`}>
+            <div ref={messageOutputRef} className={`${styles.messageOutput} flex flex-col justify-end h-64 mx-auto bg-gray-400 overflow-auto inset-0 s text-2xl`}>
                 {
                     serverMessage.map((item, index):JSX.Element => {
-                        return <div key={index}>{item}</div>
+                        return <div key={index} className=" text-right">{item}</div>
                     })
                 }
             </div>
