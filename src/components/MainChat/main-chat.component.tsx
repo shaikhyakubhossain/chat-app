@@ -3,12 +3,16 @@ import { useEffect, useRef, useState } from "react";
 import styles from './main-chat.module.scss';
 
 
+type webSocketDateType = { type: string, data: string, client: string };
+
+type serverMessageType = { sentBy: string, message: string,};
+
 let shouldSetupSocket = true;
 
 export default function MainChat(): JSX.Element {
 
     const [ws, setWs] = useState<WebSocket | null>(null);
-    const [serverMessage, setServerMessage] = useState<string[]>([]);
+    const [serverMessage, setServerMessage] = useState<serverMessageType[]>([]);
 
     const messageOutputRef = useRef<null | HTMLDivElement>(null);
     const inputRef = useRef<null | HTMLInputElement>(null);
@@ -42,8 +46,15 @@ export default function MainChat(): JSX.Element {
         };
 
         socket.onmessage = (event) => {
-            console.log("Received a message from the server", event.data);
-            setServerMessage((prev) =>  [ ...prev, event.data ]);
+            const data: webSocketDateType = JSON.parse(event.data);
+            console.log("Received a message from the server", (data.data));
+            switch (data.type) {
+                case "message":
+                    setServerMessage((prev) =>  [ ...prev, {sentBy:data.client, message:data.data} ]);
+                    break;
+                default:
+                    break;
+            }
             
         }
 
@@ -70,7 +81,7 @@ export default function MainChat(): JSX.Element {
             <div ref={messageOutputRef} className={`${styles.messageOutput} flex flex-col justify-end h-64 mx-auto bg-gray-400 overflow-auto inset-0 s text-2xl`}>
                 {
                     serverMessage.map((item, index):JSX.Element => {
-                        return <div key={index} className=" text-right">{item}</div>
+                        return <div key={index} className=" text-right">{item.sentBy + ": " + item.message}</div>
                     })
                 }
             </div>
