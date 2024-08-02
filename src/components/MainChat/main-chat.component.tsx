@@ -79,7 +79,7 @@ export default function MainChat(): JSX.Element {
     }
 
     return (
-        <div className={`${styles.mainContainer} text-center w-1/3 mx-auto`}>
+        <div className={`${styles.mainContainer} text-center mx-auto`}>
             <h1 className="text-3xl font-bold">Main Chat</h1>
             <ChatBox serverMessage={serverMessage} />
             <div className='flex justify-center '>
