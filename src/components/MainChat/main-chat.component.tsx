@@ -37,8 +37,8 @@ export default function MainChat(): JSX.Element {
 
     const setupSocket = () => {
 
-    socket = new WebSocket("ws://localhost:4000");
-
+    socket = new WebSocket("ws://chat-app-backend-m7odhdshvybhbhuddmkkxlmkoeiw121hbhgursrx.vercel.app/");
+    
 
         console.log('setupSocket');
         socket.onopen = () => {
