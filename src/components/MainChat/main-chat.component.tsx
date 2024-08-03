@@ -23,13 +23,13 @@ export default function MainChat(): JSX.Element {
 
     useEffect(() => {
 
-        console.log("useEffect");
+        // console.log("useEffect");
 
         shouldSetupSocket && setupSocket();
         shouldSetupSocket = false;
 
         return () => {
-        console.log("useEffectReturn");
+        // console.log("useEffectReturn");
         ws && socket.close();
         }
         
@@ -38,10 +38,10 @@ export default function MainChat(): JSX.Element {
 
     const setupSocket = () => {
 
-    socket = new WebSocket("wss://chat-app-backend-83vn.onrender.com/");
-    // socket = new WebSocket("ws://localhost:4000");
+    // socket = new WebSocket("wss://chat-app-backend-83vn.onrender.com/");
+    socket = new WebSocket("ws://localhost:4000");
 
-        console.log('setupSocket');
+        // console.log('setupSocket');
         socket.onopen = () => {
             console.log("Connected to the server");
             setWs(socket);
@@ -55,7 +55,6 @@ export default function MainChat(): JSX.Element {
                 setServerMessage((prev) => [...prev , { sentBy: data.client, message: data.data }]);
             }
             else if (data.type === "clientsOnline") {
-                
                 setClientsOnline(data.clientsOnline);
             }
             
@@ -70,7 +69,7 @@ export default function MainChat(): JSX.Element {
 
     const sendMessage = () => {
         if(ws && inputRef.current && inputRef.current.value !== ""){
-            ws.send(inputRef.current.value);         
+            ws.send(inputRef.current.value);
         }
         else{
             !ws && console.log("no server");
@@ -90,7 +89,7 @@ export default function MainChat(): JSX.Element {
                     <button onClick={sendMessage} className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 my-auto dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">send</button>
                 </div>
                 <div>
-                    <div>Clients Online: {clientsOnline}</div>
+                    {clientsOnline && <div>Clients Online: {clientsOnline}</div>}
                 </div>
             </div>
         </div>
