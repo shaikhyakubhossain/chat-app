@@ -1,4 +1,4 @@
-import styles from './left-menu.module.scss'
+import styles from './left-menu.module.scss';
 
 
 

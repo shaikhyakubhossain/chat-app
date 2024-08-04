@@ -1,12 +1,16 @@
 import "./globals.css";
 import UserAuth from "@/components/UserAuth/user-auth.component";
-import MainChat from "@/components/MainChat/main-chat.component";
+import LeftSection from "@/components/LeftSection/left-section.component";
+import RightSection from "@/components/RightSection/right-section.component";
+
+
 
 export default function Home() {
   return (
-    <div className=''>
+    <div className='flex'>
         {/* <UserAuth /> */}
-        <MainChat />
+      <LeftSection />
+      <RightSection />
     </div>
   );
 }
