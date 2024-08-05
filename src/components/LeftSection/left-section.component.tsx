@@ -6,7 +6,7 @@ import LeftMenu from '../LeftMenu/left-menu.component';
 
 export default function LeftSection(): JSX.Element {
     return (
-        <div className={`${styles.mainContainer} w-1/4`}>
+        <div className={`${styles.mainContainer} w-80`}>
             <LeftMenuNav />
             <LeftMenu />
         </div>

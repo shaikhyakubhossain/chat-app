@@ -6,7 +6,7 @@ import MainChat from '../MainChat/main-chat.component';
 
 export default function RightSection(): JSX.Element {
     return (
-        <div className={`${styles.mainContainer} w-3/4`}>
+        <div className={`${styles.mainContainer} w-full`}>
             <Nav />
             <MainChat />
         </div>
