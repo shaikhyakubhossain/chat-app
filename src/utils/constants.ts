@@ -1,31 +1,28 @@
 
-export const connectedUsers = [
+export const conversationsList = [
+    {
+        name: 'Public Group',
+        status: 'online',
+        type: 'group'
+    },
     {
         name: 'person-1',
-        status: 'online'
+        status: 'offline',
+        type: 'individual'
     },
     {
         name: 'person-2',
-        status: 'offline'
+        status: 'offline',
+        type: 'individual'
     },
     {
         name: 'person-3',
-        status: 'online'
+        status: 'offline',
+        type: 'individual'
     },
     {
         name: 'person-4',
-        status: 'offline'
+        status: 'offline',
+        type: 'individual'
     }
-]
-
-export const connectedGroups = [
-    {
-        name: 'Public group chat',
-        status: 'default'
-    },
-    {
-        name: 'group-1',
-        status: 'online'
-    }
-    
 ]
