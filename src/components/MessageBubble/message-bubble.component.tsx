@@ -23,7 +23,11 @@ export default function MessageBubble(props: propsType): JSX.Element {
 
     return (
         <div className={`${styles.mainContainer} flex ${toggleSide} text-center`}>
-            <span className={`text-slate-800 ${toggleColor} rounded my-2 px-4 py-3`}>{props.sentBy + ": " + props.message}</span>
+            <div className={`text-slate-800 ${toggleColor} rounded my-2 px-4 py-3`}>
+            <div className={`text-2xl`}>{props.message}</div>
+            <div className={`text-sm text-right`}>{props.sentBy}</div>
+            </div>
+            
         </div>
     )
 }

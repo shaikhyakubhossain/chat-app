@@ -10,7 +10,7 @@ type propsType = {
 
 export default function ChatBox(props: propsType): JSX.Element {
     return (
-            <div className={`${styles.messageOutput} flex flex-col justify-end mx-auto text-2xl`}>
+            <div className={`${styles.messageOutput} flex flex-col mx-auto overflow-y-auto`}>
                 {
                     props.serverMessage.map((item, index):JSX.Element => {
                         return <MessageBubble key={index} message={item.message} sentBy={item.sentBy}/>
