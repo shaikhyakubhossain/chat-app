@@ -1,3 +1,10 @@
 .mainContainer {
     border-right: 1px solid rgb(176, 176, 176);
 }
+
+@media screen and (max-width: 890px) {
+    .mainContainer {
+        display: block;
+        width:100%;
+    }
+}
