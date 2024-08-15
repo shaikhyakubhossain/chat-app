@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from './main-chat.module.scss';
 import ChatBox from "../ChatBox/chat-box.component";
+import MessageInput from "../MessageInput/message-input.component";
 
 
 type webSocketDateType = { type: string, data: string, client: string, clientsOnline?: string };
@@ -17,7 +18,7 @@ export default function MainChat(): JSX.Element {
     const [clientsOnline, setClientsOnline] = useState<string | undefined>("");
 
     // const messageOutputRef = useRef<null | HTMLDivElement>(null);
-    const inputRef = useRef<null | HTMLInputElement>(null);
+    const containerOfInputRef = useRef<null | HTMLDivElement>(null);
 
     let socket: WebSocket;
 
@@ -68,8 +69,10 @@ export default function MainChat(): JSX.Element {
 
 
     const sendMessage = () => {
-        if(ws && inputRef.current && inputRef.current.value !== ""){
-            ws.send(inputRef.current.value);
+        const inputValue = (containerOfInputRef.current?.children[0].children[0] as HTMLInputElement).value;
+        console.log(inputValue)
+        if(ws && containerOfInputRef.current?.children[0].children[0] && inputValue !== ""){
+            ws.send(inputValue);
         }
         else{
             !ws && console.log("no server");
@@ -81,11 +84,8 @@ export default function MainChat(): JSX.Element {
         <div className={`${styles.mainContainer} text-center mx-auto mt-16 absolute left-0 right-0 bottom-0`}>
             {ws ? <ChatBox serverMessage={serverMessage} /> : <div>Connecting...</div>}
             <div className='flex justify-center '>
-                <div>
-                    <input ref={inputRef} className={`${styles.messageInput} h-12 text-black`} type="text" placeholder="Enter message..."/>
-                </div>
-                <div>
-                    <button onClick={sendMessage} className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 my-auto dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">send</button>
+                <div ref={containerOfInputRef} className="w-3/4 mx-auto">
+                    <MessageInput sendMessageFunction={sendMessage}/>
                 </div>
                 <div>
                     {clientsOnline && <div>Clients Online: {clientsOnline}</div>}
