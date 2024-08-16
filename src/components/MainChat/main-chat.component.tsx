@@ -24,6 +24,7 @@ export default function MainChat(): JSX.Element {
 
     useEffect(() => {
 
+        document.addEventListener("keyup", handleKeydown, true);
         // console.log("useEffect");
 
         shouldSetupSocket && setupSocket();
@@ -31,11 +32,18 @@ export default function MainChat(): JSX.Element {
 
         return () => {
         // console.log("useEffectReturn");
+        document.removeEventListener("keyup", handleKeydown, true);
         ws && socket.close();
         }
         
 
-    }, []);
+    }, [ws]);
+
+    const handleKeydown = (event: KeyboardEvent) => {
+        if(event.key === "Enter"){
+            sendMessage();
+        }
+    }
 
     const setupSocket = () => {
 
@@ -75,6 +83,7 @@ export default function MainChat(): JSX.Element {
             ws.send(inputValue);
         }
         else{
+            console.log("is true?", ws );
             !ws && console.log("no server");
 
         }
