@@ -97,7 +97,7 @@ export default function MainChat(): JSX.Element {
                     <MessageInput sendMessageFunction={sendMessage}/>
                 </div>
                 <div>
-                    {clientsOnline && <div>Clients Online: {clientsOnline}</div>}
+                    {clientsOnline && <div className="bg-slate-500 text-white rounded p-2">Clients Online: {clientsOnline}</div>}
                 </div>
             </div>
         </div>
