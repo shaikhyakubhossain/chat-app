@@ -2,6 +2,11 @@
 @media screen and (max-width: 890px) {
     .mainContainer {
         display: none;
-        
+        width: 100%;
     }
+}
+
+.mainContainer {
+    // width: 79.1dvw;
+    width: calc(100% - 320px);
 }

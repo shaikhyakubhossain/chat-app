@@ -1,4 +1,8 @@
 .messageOutput {
     width: 80%;
-    height: 85dvh;
+    height: 82dvh;
+}
+
+.messageOutput::-webkit-scrollbar {
+    display: none;
 }

@@ -6,7 +6,7 @@ import MessageIO from '../MessageIO/message-io.component';
 
 export default function RightSection(): JSX.Element {
     return (
-        <div className={`${styles.mainContainer} flex flex-col w-full bg-white`}>
+        <div className={`${styles.mainContainer} flex flex-col  bg-white`}>
             <Nav />
             <MessageIO />
         </div>
