@@ -7,7 +7,7 @@ import RightSection from "@/components/RightSection/right-section.component";
 
 export default function Home() {
   return (
-    <div className='flex'>
+    <div className='flex h-dvh'>
         {/* <UserAuth /> */}
       <LeftSection />
       <RightSection />

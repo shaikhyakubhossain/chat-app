@@ -2,8 +2,9 @@ import styles from './message-bubble.module.scss';
 
 
 type propsType = {
-    message: string
-    sentBy: string
+    message: string,
+    sentBy: string,
+    customTW?: string
 }
 
 export default function MessageBubble(props: propsType): JSX.Element {
@@ -22,8 +23,8 @@ export default function MessageBubble(props: propsType): JSX.Element {
 
 
     return (
-        <div className={`${styles.mainContainer} flex ${toggleSide} text-center`}>
-            <div className={`text-slate-800 ${toggleColor} rounded my-2 px-4 py-3`}>
+        <div className={`${styles.mainContainer} flex ${toggleSide} ${props.customTW} text-center`}>
+            <div className={`text-slate-800 ${toggleColor} rounded my-2 px-4 py-3 overflow-x-auto break-words`}>
             <div className={`text-sm text-left`}>{props.sentBy}</div>
             <div className={`text-2xl`}>{props.message}</div>
             </div>

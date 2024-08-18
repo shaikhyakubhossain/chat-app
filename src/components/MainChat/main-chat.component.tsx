@@ -17,7 +17,7 @@ export default function MainChat(): JSX.Element {
     const [serverMessage, setServerMessage] = useState<serverMessageType[]>([]);
     const [clientsOnline, setClientsOnline] = useState<string | undefined>("");
 
-    // const messageOutputRef = useRef<null | HTMLDivElement>(null);
+    const containerOfMessageOutputRef = useRef<null | HTMLDivElement>(null);
     const containerOfInputRef = useRef<null | HTMLDivElement>(null);
 
     let socket: WebSocket;
@@ -62,6 +62,11 @@ export default function MainChat(): JSX.Element {
             if (data.type === "message") {
                 console.log("message", data);
                 setServerMessage((prev) => [...prev , { sentBy: data.client, message: data.data }]);
+                if(containerOfMessageOutputRef.current?.children[0]){
+
+                    containerOfMessageOutputRef.current.children[0].scrollTop = containerOfMessageOutputRef.current?.children[0].scrollHeight;
+                
+                }
             }
             else if (data.type === "clientsOnline") {
                 setClientsOnline(data.clientsOnline);
@@ -81,7 +86,7 @@ export default function MainChat(): JSX.Element {
         console.log(inputValue.value)
         if(ws && containerOfInputRef.current?.children[0].children[0] && inputValue.value !== ""){
             ws.send(inputValue.value);
-            inputValue.value = "";
+            // inputValue.value = "";
             console.log(inputValue.value);
         }
         else{
@@ -90,7 +95,7 @@ export default function MainChat(): JSX.Element {
     }
 
     return (
-        <div className={`${styles.mainContainer} text-center mx-auto mt-16 absolute left-0 right-0 bottom-0`}>
+        <div className={`${styles.mainContainer} text-center mx-auto`} ref={containerOfMessageOutputRef}>
             {ws ? <ChatBox serverMessage={serverMessage} /> : <div>Connecting...</div>}
             <div className='flex justify-center '>
                 <div ref={containerOfInputRef} className="w-3/4 mx-auto">
