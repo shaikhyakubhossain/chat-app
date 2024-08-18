@@ -77,15 +77,15 @@ export default function MainChat(): JSX.Element {
 
 
     const sendMessage = () => {
-        const inputValue = (containerOfInputRef.current?.children[0].children[0] as HTMLInputElement).value;
-        console.log(inputValue)
-        if(ws && containerOfInputRef.current?.children[0].children[0] && inputValue !== ""){
-            ws.send(inputValue);
+        const inputValue = (containerOfInputRef.current?.children[0].children[0] as HTMLInputElement);
+        console.log(inputValue.value)
+        if(ws && containerOfInputRef.current?.children[0].children[0] && inputValue.value !== ""){
+            ws.send(inputValue.value);
+            inputValue.value = "";
+            console.log(inputValue.value);
         }
         else{
-            console.log("is true?", ws );
             !ws && console.log("no server");
-
         }
     }
 
