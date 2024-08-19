@@ -25,7 +25,7 @@ export default function MainChat(): JSX.Element {
     useEffect(() => {
 
         document.addEventListener("keyup", handleKeydown, true);
-        // console.log("useEffect");
+        // console.log("useEffect for WS");
 
         shouldSetupSocket && setupSocket();
         shouldSetupSocket = false;
@@ -33,11 +33,18 @@ export default function MainChat(): JSX.Element {
         return () => {
         // console.log("useEffectReturn");
         document.removeEventListener("keyup", handleKeydown, true);
+        // console.log("unmounting useEffect for WS");
         ws && socket.close();
         }
         
 
     }, [ws]);
+
+    useEffect(() => {
+
+        handleScrollToBottom();
+
+    }, [serverMessage]);
 
     const handleKeydown = (event: KeyboardEvent) => {
         if(event.key === "Enter"){
@@ -58,15 +65,10 @@ export default function MainChat(): JSX.Element {
 
         socket.onmessage = (event) => {
             const data: webSocketDateType = JSON.parse(event.data);
-            console.log("Received", (data));
+            // console.log("Received", (data));
             if (data.type === "message") {
-                console.log("message", data);
+                // console.log("message", data);
                 setServerMessage((prev) => [...prev , { sentBy: data.client, message: data.data }]);
-                if(containerOfMessageOutputRef.current?.children[0]){
-
-                    containerOfMessageOutputRef.current.children[0].scrollTop = containerOfMessageOutputRef.current?.children[0].scrollHeight;
-                
-                }
             }
             else if (data.type === "clientsOnline") {
                 setClientsOnline(data.clientsOnline);
@@ -83,20 +85,28 @@ export default function MainChat(): JSX.Element {
 
     const sendMessage = () => {
         const inputValue = (containerOfInputRef.current?.children[0].children[0] as HTMLInputElement);
-        console.log(inputValue.value)
+        // console.log(inputValue.value)
         if(ws && containerOfInputRef.current?.children[0].children[0] && inputValue.value !== ""){
             ws.send(inputValue.value);
-            // inputValue.value = "";
-            console.log(inputValue.value);
+            inputValue.value = "";
+            // console.log(inputValue.value);
         }
         else{
             !ws && console.log("no server");
         }
     }
 
+    const handleScrollToBottom = () => {
+        if(containerOfMessageOutputRef.current?.children[0]){
+
+            containerOfMessageOutputRef.current.children[0].scrollTop = containerOfMessageOutputRef.current?.children[0].scrollHeight;
+        
+        }
+    }
+
     return (
         <div className={`${styles.mainContainer} text-center mx-auto`} ref={containerOfMessageOutputRef}>
-            {ws ? <ChatBox serverMessage={serverMessage} /> : <div>Connecting...</div>}
+            {ws ? <ChatBox serverMessage={serverMessage} /> : <div className="mb-auto bg-lime-600 text-white rounded p-2">Connecting to the server...</div>}
             <div className='flex justify-center '>
                 <div ref={containerOfInputRef} className="w-3/4 mx-auto">
                     <MessageInput sendMessageFunction={sendMessage}/>
