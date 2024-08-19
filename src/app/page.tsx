@@ -1,16 +1,13 @@
 import "./globals.css";
 import UserAuth from "@/components/UserAuth/user-auth.component";
-import LeftSection from "@/components/LeftSection/left-section.component";
-import RightSection from "@/components/RightSection/right-section.component";
-
+import SectionContainer from "@/components/SectionContainer/section-container.component";
 
 
 export default function Home() {
   return (
-    <div className='flex h-dvh'>
+    <div className=''>
         {/* <UserAuth /> */}
-      <LeftSection />
-      <RightSection />
+        <SectionContainer />
     </div>
   );
 }
