@@ -1,4 +1,4 @@
-import Nav from "@/components/Nav/nav.component";
+import RTKStoreProvider from "@/components/RTKStoreProvider/rtk-store-provider.component";
 
 export const metadata = {
   title: "Next.js",
@@ -13,7 +13,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="text-black">
+        <RTKStoreProvider>
         {children}
+        </RTKStoreProvider>
       </body>
     </html>
   );
