@@ -4,7 +4,7 @@ import styles from './left-menu-nav.module.scss';
 import { menuIcon } from '@/utils/icons';
 import Btn from '../Btn/btn.component';
 
-import type { RootStart } from '@/lib/store';
+import type { RootState } from '@/lib/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggle } from '@/lib/features/MainMobileWindow/mainMobileWindowSlice';
 
@@ -12,7 +12,7 @@ import { toggle } from '@/lib/features/MainMobileWindow/mainMobileWindowSlice';
 
 export default function LeftMenuNav(): JSX.Element {
 
-    const isOpen = useSelector((state: RootStart) => state.mainMobileWindow.isOpen)
+    const isOpen = useSelector((state: RootState) => state.mainMobileWindow.isOpen)
 
     const dispatch = useDispatch();
 

@@ -1,3 +1,19 @@
 .navContainer {
     z-index: 2;
 }
+
+@media screen and (max-width: 888px) {
+    
+    .backArrowBtn {
+        display: block;
+    }
+
+}
+
+@media screen and (min-width: 889px) {
+    
+    .backArrowBtn {
+        display: none;
+    }
+
+}
