@@ -17,7 +17,7 @@ export default function LeftMenuNav(): JSX.Element {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(isOpen);
+        // console.log(isOpen);
     }, [isOpen])
 
     return (
