@@ -84,16 +84,26 @@ export default function MainChat(): JSX.Element {
 
 
     const sendMessage = () => {
-        const inputValue = (containerOfInputRef.current?.children[0].children[0] as HTMLInputElement);
-        // console.log(inputValue.value)
-        if(ws && containerOfInputRef.current?.children[0].children[0] && inputValue.value !== ""){
-            ws.send(inputValue.value);
-            inputValue.value = "";
-            // console.log(inputValue.value);
+        if((containerOfInputRef.current?.children[1].children[0] as HTMLInputElement).value.length <= 250){
+            const inputValue = (containerOfInputRef.current?.children[1].children[0] as HTMLInputElement);
+            // console.log(inputValue.value)
+            if(ws && containerOfInputRef.current?.children[1].children[0] && inputValue.value !== ""){
+                ws.send(inputValue.value);
+                inputValue.value = "";
+                // console.log(inputValue.value);
+            }
+            else{
+                !ws && console.log("no server");
+            }
         }
         else{
-            !ws && console.log("no server");
+            (containerOfInputRef.current?.children[0] as HTMLDivElement).style.display = "block";
+            setTimeout(() => {
+                (containerOfInputRef.current?.children[0] as HTMLDivElement).style.display = "none";
+            }, 2000)
+            console.log("message too long");
         }
+        
     }
 
     const handleScrollToBottom = () => {
@@ -109,6 +119,7 @@ export default function MainChat(): JSX.Element {
             {ws ? <ChatBox serverMessage={serverMessage} /> : <div className="mb-auto bg-lime-600 text-white rounded p-2">Connecting to the server...</div>}
             <div className='flex justify-center '>
                 <div ref={containerOfInputRef} className="w-3/4 mx-auto">
+                    <div className={`${styles.messageTooLongError} mb-auto bg-red-500 text-white rounded p-2`}>max 250 char, Message too long</div>
                     <MessageInput sendMessageFunction={sendMessage}/>
                 </div>
                 <div>

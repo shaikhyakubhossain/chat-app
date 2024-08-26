@@ -12,7 +12,7 @@ type PropsType = {
     customTW?: string
 }
 
-export default function ConversationCard(props: PropsType) {
+export default function ConversationCard(props: PropsType): JSX.Element {
     return (
         <div className={`${styles.conversationCard} flex p-3 cursor-pointer ${props.customTW}`} onClick={props.onClick}>
             <div className={`${styles.profileImg} min-w-14 min-h-14 rounded-full bg-slate-500 my-auto`}><img src={props.profileImg} alt='' /></div>
