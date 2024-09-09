@@ -61,7 +61,7 @@ export default function MainChat(): JSX.Element {
             {ws ? <ChatBox serverMessage={messagesList} /> : <div className="mb-auto bg-lime-600 text-white rounded p-2">Connecting to the server...</div>}
             <div className='flex justify-center '>
                 <div ref={containerOfInputRef} className="w-3/4 mx-auto">
-                    <div className={`${styles.messageTooLongError} mb-auto bg-red-500 text-white rounded p-2`}>max 250 char, Message too long</div>
+                    <div className={`${styles.messageTooLongError} mb-auto bg-red-500 text-white rounded p-2`}>Message too long, max 250 characters</div>
                     <MessageInput sendMessageFunction={sendMessage}/>
                 </div>
                 <div>
