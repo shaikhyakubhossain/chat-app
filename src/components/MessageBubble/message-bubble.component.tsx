@@ -3,7 +3,7 @@ import styles from './message-bubble.module.scss';
 
 type propsType = {
     message: string,
-    sentBy: string,
+    sentBy: string | undefined,
     customTW?: string
 }
 

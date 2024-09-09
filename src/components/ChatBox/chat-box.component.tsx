@@ -2,7 +2,7 @@ import styles from './chat-box.module.scss';
 import MessageBubble from '../MessageBubble/message-bubble.component';
 
 
-type serverMessageType = { sentBy: string, message: string,};
+type serverMessageType = { sentBy: string | undefined, message: string,};
 
 type propsType = {
     serverMessage: serverMessageType[]
