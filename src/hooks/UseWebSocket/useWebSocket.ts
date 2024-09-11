@@ -1,3 +1,4 @@
+import { connected } from "process";
 import { useState, useEffect } from "react";
 
 type webSocketDateType = {
@@ -11,6 +12,7 @@ type serverMessageType = { sentBy: string | undefined; message: string };
 
 const useWebSocket = () => {
   const [ws, setWs] = useState<WebSocket | null>(null);
+  // const [isConnected, setIsConnected] = useState<boolean>(false);
   const [messagesList, setMessagesList] = useState<serverMessageType[]>([]);
   const [clientsOnline, setClientsOnline] = useState<string | undefined>("");
 
@@ -18,14 +20,15 @@ const useWebSocket = () => {
 
   useEffect(() => {
     !socket && setupSocket();
+    // ws && setIsConnected(true);
   }, []);
 
   const setupSocket = () => {
     socket = new WebSocket("wss://chat-app-backend-83vn.onrender.com/");
     // socket = new WebSocket("ws://localhost:4000");
-    setWs(socket);
     socket.onopen = () => {
       console.log("connected to server");
+      setWs(socket);
     };
 
     socket.onmessage = (event) => {
@@ -56,6 +59,7 @@ const useWebSocket = () => {
 
   return {
     ws,
+    // isConnected,
     messagesList,
     clientsOnline,
     sendMessage,
