@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from './main-chat.module.scss';
 import ChatBox from "../ChatBox/chat-box.component";
 import MessageInput from "../MessageInput/message-input.component";
-import useWebSocket from "@/hooks/useWebSocket/useWebSocket";
+import useWebSocket from "@/hooks/WebSocket/useWebSocket";
 
 export default function MainChat(): JSX.Element {
     const { messagesList, clientsOnline, ws } = useWebSocket();
