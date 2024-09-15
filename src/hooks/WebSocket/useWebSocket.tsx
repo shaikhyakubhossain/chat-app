@@ -18,7 +18,11 @@ const useWebSocket = () => {
 
   useEffect(() => {
     !socket && setupSocket();
-    // ws && setIsConnected(true);
+    return () => {
+      if(socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
+        socket.close();
+      }
+    }
   }, []);
 
   const setupSocket = () => {
