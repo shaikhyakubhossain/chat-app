@@ -18,11 +18,9 @@ let prevConversationCard: null | HTMLDivElement = null;
 
 export default function LeftMenu(): JSX.Element {
 
-
     let customTW = '';
 
     const dispatch = useDispatch();
-
 
     const setter = (item: itemType, event: React.MouseEvent<HTMLDivElement>) => {
 
@@ -30,19 +28,14 @@ export default function LeftMenu(): JSX.Element {
 
         const currentConversationCard = (event.currentTarget) as HTMLDivElement;
         prevConversationCard?.classList.remove("bg-teal-200");
-        console.log("prevConversationCard", prevConversationCard);
         currentConversationCard?.classList.add("bg-teal-200");
-        console.log("currentConversationCard", currentConversationCard);
-
 
         dispatch(setTitle(item.name));
         dispatch(setStatus(item.status));
         dispatch(setType(item.type));
-
         dispatch(setTrue());
 
         prevConversationCard = currentConversationCard;
-
     }
 
     return (
