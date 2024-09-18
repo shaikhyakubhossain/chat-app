@@ -27,12 +27,7 @@ export default function UserAuth(): JSX.Element {
         }),
       }).then((res) => {
         console.log(res.json().then((data) => console.log(data)));
-        if(res.status === 400){
-          setData(res.status.toString());
-        }
-        else if(res.status === 200){
-          setData(res.status.toString());
-        }
+        setData(res.status.toString());
       });
   };
 
