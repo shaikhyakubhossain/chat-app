@@ -41,10 +41,10 @@ export default function UserAuth(): JSX.Element {
       <div className="font-bold text-5xl text-center mb-4">
         Welcome to Chat App!
       </div>
-      <div className="flex justify-center">
+      <div className="flex flex-wrap justify-center">
         <div>
           <Btn
-            customTW="bg-green-500 mr-2"
+            customTW="bg-green-500 my-3 mx-2"
             onClick={() => setAuthType("login")}
           >
             login
@@ -52,7 +52,7 @@ export default function UserAuth(): JSX.Element {
         </div>
         <div>
           <Btn
-            customTW="bg-green-500 ml-2"
+            customTW="bg-green-500 my-3 mx-2"
             onClick={() => setAuthType("register")}
           >
             Create Account
