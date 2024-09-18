@@ -43,15 +43,16 @@ const AuthInput = (props: propsType) => {
                         <label className="block mb-2 text-sm font-medium text-gray-900">Password</label>
                         <input onChange={(e) => setDataToSend({...dataToSend, password: e.target.value})} type="password" id="password" className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`} placeholder="password" required />
                     </div> 
-                    <div className={`${props.status === '400' ? 'block' : 'hidden'} text-red-800`}>Password must be at least 6 characters</div>
-                    <div className={`${props.status === '400' ? 'block' : 'hidden'} text-red-800`}>Passwords do not match</div>
-
+                    <div className={`${dataToSend.password.length <= 5 && props.type === 'register' && dataToSend.password !== "" ? 'block' : 'hidden'} text-red-800`}>Password must be at least 6 characters</div>
                     {
                         props.type === 'register' && (
+                        <>
                         <div className="mb-6">
                             <label className="block mb-2 text-sm font-medium text-gray-900">Confirm password</label>
                             <input onChange={(e) => setDataToSend({...dataToSend, confirmPassword: e.target.value})} type="password" id="confirm_password" className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`} placeholder="confirm password" required />
                         </div>
+                        <div className={`${dataToSend.password !== dataToSend.confirmPassword && props.type === 'register' && dataToSend.confirmPassword !== "" ? 'block' : 'hidden'} text-red-800`}>Passwords do not match</div>
+                        </>
                         )
                     }
                 </div>
