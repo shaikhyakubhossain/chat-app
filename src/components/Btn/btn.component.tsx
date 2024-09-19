@@ -2,7 +2,7 @@ import styles from './btn.module.scss';
 
 type propsType = {
     children: React.ReactNode,
-    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
     customTW?: string,
     customClass?: string,
     disabled?: boolean
