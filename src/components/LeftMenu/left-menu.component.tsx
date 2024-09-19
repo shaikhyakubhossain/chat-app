@@ -39,7 +39,7 @@ export default function LeftMenu(): JSX.Element {
     }
 
     return (
-        <div className={`${styles.mainContainer} mt-16`}>
+        <div className={`${styles.mainContainer}`}>
             {
                 conversationsList.map((item, index): JSX.Element => {
                     return (

@@ -21,7 +21,7 @@ export default function LeftMenuNav(): JSX.Element {
     }, [isOpen])
 
     return (
-        <div className={`${styles.mainContainer} flex fixed items-center w-full justify-between h-16 text-black bg-white`}>
+        <div className={`${styles.mainContainer} flex w-full justify-between h-16 text-black bg-white`}>
             <Btn onClick={() => dispatch(toggle())} customClass={styles.menuIcon} customTW='hover:bg-slate-400'><img className={`${styles.menuIconImg} w-6 h-6`} src={menuIcon} alt="" /></Btn>
         </div>
     )

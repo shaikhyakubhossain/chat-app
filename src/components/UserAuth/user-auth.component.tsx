@@ -4,18 +4,27 @@ import { useState } from "react";
 import AuthInput from "../AuthInput/auth-input.component";
 import Btn from "../Btn/btn.component";
 
+import { useDispatch } from "react-redux";
+import { setDetail } from "@/lib/features/AuthDetail/authDetailSlice";
+
 type dataToSendType = {
   username: string;
   password: string;
 };
 
+type responseDataType = {
+  error: string;
+}
+
 export default function UserAuth(): JSX.Element {
 
+  const dispatch = useDispatch();
+
   const [authType, setAuthType] = useState<null | string>("login");
-  const [data, setData] = useState<string>("");
+  const [responseData, setResponseData] = useState<responseDataType | null>(null);
 
   const handleLoginOrSignUp = (dataToSend: dataToSendType) => {
-      fetch(`http://localhost:4000/${authType}`, {
+      fetch(`http://chat-app-backend-83vn.onrender.com/${authType}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -26,8 +35,16 @@ export default function UserAuth(): JSX.Element {
           password: dataToSend.password,
         }),
       }).then((res) => {
-        console.log(res.json().then((data) => console.log(data)));
-        setData(res.status.toString());
+        res.json().then((data) => {
+          console.log(data);
+          setResponseData(data);
+          if(!data.error){
+            dispatch(setDetail(data))
+          }
+        });
+      })
+      .catch((err) => {
+        console.log("err", err);
       });
   };
 
@@ -54,7 +71,7 @@ export default function UserAuth(): JSX.Element {
           </Btn>
         </div>
       </div>
-      {<AuthInput type={authType} submit={handleLoginOrSignUp} status={data} />}
+      {<AuthInput type={authType} submit={handleLoginOrSignUp} error={responseData?.error ? responseData.error : null} />}
     </div>
   );
 }

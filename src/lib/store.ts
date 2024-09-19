@@ -2,11 +2,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import mainMobileWindowSlice from "./features/MainMobileWindow/mainMobileWindowSlice";
 import navActiveChatSlice from "./features/navActiveChat/navActiveChatSlice";
+import authDetailSlice from './features/AuthDetail/authDetailSlice';
 
 export const store = configureStore({
     reducer: {
         mainMobileWindow: mainMobileWindowSlice,
-        navActiveChat: navActiveChatSlice
+        navActiveChat: navActiveChatSlice,
+        authDetail: authDetailSlice
     }
 });
 
