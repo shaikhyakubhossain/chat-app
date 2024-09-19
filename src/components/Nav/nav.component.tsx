@@ -14,12 +14,13 @@ export default function Nav(): JSX.Element {
     const title = useSelector((state: RootState) => state.navActiveChat.title);
     const status = useSelector((state: RootState) => state.navActiveChat.status);
     const username = useSelector((state: RootState) => state.authDetail.username);
+    const token = useSelector((state: RootState) => state.authDetail.token);
     // const type = useSelector((state: RootState) => state.navActiveChat.type);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(username);
+        console.log();
     }, [title, status, username])
 
     return (
@@ -36,7 +37,7 @@ export default function Nav(): JSX.Element {
             <div></div>
             {username ? <div className={`${styles.username} flex text-center`}>
                 <div className={'w-11 h-11 rounded-full bg-slate-500 my-auto'}><div className='text-white text-2xl'>{username[0]}</div></div>
-                <div className='my-auto text-2xl'>{username}</div>
+                <div className='my-auto'>{username}</div>
             </div> : null}
             <div></div>
         </div>

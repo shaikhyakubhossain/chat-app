@@ -1,6 +1,6 @@
 "use client";
 import styles from "./user-auth.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthInput from "../AuthInput/auth-input.component";
 import Btn from "../Btn/btn.component";
 
@@ -26,7 +26,8 @@ export default function UserAuth(): JSX.Element {
 
   const handleLoginOrSignUp = (dataToSend: dataToSendType) => {
     setShowLoading(true);
-      fetch(`https://chat-app-backend-83vn.onrender.com/${authType}`, {
+      // fetch(`https://chat-app-backend-83vn.onrender.com/${authType}`, {
+        fetch(`http://localhost:4000/${authType}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -43,6 +44,7 @@ export default function UserAuth(): JSX.Element {
           setShowLoading(false);
           if(!data.error){
             dispatch(setDetail(data))
+            localStorage.setItem("authDetail", JSON.stringify(data));
           }
         });
       })
@@ -50,6 +52,14 @@ export default function UserAuth(): JSX.Element {
         console.log("err", err);
       });
   };
+
+  useEffect(() => {
+    let authDetail;
+    if(localStorage.getItem("authDetail") !== null){
+      authDetail = JSON.parse(localStorage.getItem("authDetail")!);
+      dispatch(setDetail(authDetail));
+    }
+  },[])
 
   return (
     <div className={`${styles.mainContainer} w-3/4 m-auto`}>

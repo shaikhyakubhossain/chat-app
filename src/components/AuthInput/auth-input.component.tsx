@@ -32,7 +32,7 @@ const AuthInput = (props: propsType) => {
     return (
         <div className={styles.authInputContainer}>
             {
-                props.type === 'login' ? <div className='text-3xl text-center mx-auto mt-2'>Login</div> : <div className='text-3xl text-center mx-auto mt-2'>Register</div>
+                props.type === 'login' ? <div className='text-3xl font-bold text-center mx-auto mt-2'>Login</div> : <div className='text-3xl font-bold text-center mx-auto mt-2'>Register</div>
             }
             <div className={`${styles.textFieldContainer}`}>
                     <div className="my-4">
@@ -59,7 +59,7 @@ const AuthInput = (props: propsType) => {
                     }
                 </div>
                 <div className='flex justify-center'>
-                <Btn customTW='bg-pink-500' onClick={handleSubmit}>{props.type === 'login' ? 'Login' : 'Register'}</Btn>
+                <Btn customTW='bg-pink-500' disabled={props.isLoading} onClick={handleSubmit}>{props.type === 'login' ? 'Login' : 'Register'}</Btn>
             </div>
         </div>
     )
