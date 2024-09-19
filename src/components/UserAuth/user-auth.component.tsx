@@ -26,8 +26,8 @@ export default function UserAuth(): JSX.Element {
 
   const handleLoginOrSignUp = (dataToSend: dataToSendType) => {
     setShowLoading(true);
-      // fetch(`https://chat-app-backend-83vn.onrender.com/${authType}`, {
-        fetch(`http://localhost:4000/${authType}`, {
+      fetch(`https://chat-app-backend-83vn.onrender.com/${authType}`, {
+        // fetch(`http://localhost:4000/${authType}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
