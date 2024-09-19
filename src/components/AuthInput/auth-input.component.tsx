@@ -12,7 +12,8 @@ type dataToSendType = {
 type propsType = {
     type: string | null,
     submit: ({username, password}: dataToSendType) => void,
-    error?: string | null;
+    error?: string | null,
+    isLoading: boolean
 }
 
 const AuthInput = (props: propsType) => {
@@ -23,7 +24,7 @@ const AuthInput = (props: propsType) => {
         if(props.type === 'login'){
             props.submit(dataToSend);
         }
-        else if(props.type === 'register' && dataToSend.password === dataToSend.confirmPassword && dataToSend.password.length > 5){
+        else if(props.type === 'register' && dataToSend.password === dataToSend.confirmPassword && dataToSend.password.length > 5 && dataToSend.username !== ""){
             props.submit(dataToSend);
         }
     }
@@ -39,6 +40,7 @@ const AuthInput = (props: propsType) => {
                         <input onChange={(e) => setDataToSend({...dataToSend, username: e.target.value})} type="text" id="username" className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`} placeholder="username" required />
                     </div> 
                     <div className={`${props.error ? 'block' : 'hidden'} text-red-800`}>{props.error}</div>
+                    <div className={`${props.isLoading ? 'block' : 'hidden'} text-green-800`}>Loading</div>
                     <div className="my-4">
                         <label className="block my-1 text-sm font-medium text-gray-900">Password</label>
                         <input onChange={(e) => setDataToSend({...dataToSend, password: e.target.value})} type="password" id="password" className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`} placeholder="password" required />

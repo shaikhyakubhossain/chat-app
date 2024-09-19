@@ -22,8 +22,10 @@ export default function UserAuth(): JSX.Element {
 
   const [authType, setAuthType] = useState<null | string>("login");
   const [responseData, setResponseData] = useState<responseDataType | null>(null);
+  const [showLoading, setShowLoading] = useState<boolean>(false)
 
   const handleLoginOrSignUp = (dataToSend: dataToSendType) => {
+    setShowLoading(true);
       fetch(`https://chat-app-backend-83vn.onrender.com/${authType}`, {
         method: "POST",
         headers: {
@@ -38,6 +40,7 @@ export default function UserAuth(): JSX.Element {
         res.json().then((data) => {
           console.log(data);
           setResponseData(data);
+          setShowLoading(false);
           if(!data.error){
             dispatch(setDetail(data))
           }
@@ -71,7 +74,7 @@ export default function UserAuth(): JSX.Element {
           </Btn>
         </div>
       </div>
-      {<AuthInput type={authType} submit={handleLoginOrSignUp} error={responseData?.error ? responseData.error : null} />}
+      {<AuthInput type={authType} submit={handleLoginOrSignUp} error={responseData?.error ? responseData.error : null} isLoading={showLoading} />}
     </div>
   );
 }
