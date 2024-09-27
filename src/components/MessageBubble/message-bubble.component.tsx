@@ -20,7 +20,7 @@ export default function MessageBubble(props: propsType): JSX.Element {
     }
     else{
         toggleColor = 'text-black';
-        toggleBgColor = 'bg-white';
+        toggleBgColor = 'bg-lime-300';
         toggleSide = 'justify-start';
     }   
 

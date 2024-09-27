@@ -1,7 +1,5 @@
 import styles from './conversation-card.module.scss'
 
-
-
 type PropsType = {
     title: string,
     lastMessage?: string,

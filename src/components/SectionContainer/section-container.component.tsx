@@ -45,9 +45,9 @@ export default function SectionContainer(): JSX.Element{
                 
                 if(isOpen){
                 (sectionContainerRef.current?.children[0] as HTMLDivElement).style.width = "180px";
-                (sectionContainerRef.current?.children[1] as HTMLDivElement).style.width = "calc(100% - 180px)"; 
+                (sectionContainerRef.current?.children[1] as HTMLDivElement).style.width = "calc(100% - 180px)";
                 }
-                else{
+                else{   
                 (sectionContainerRef.current?.children[0] as HTMLDivElement).style.width = "320px";
                 (sectionContainerRef.current?.children[0] as HTMLDivElement).style.width = "320px";
                 (sectionContainerRef.current?.children[1] as HTMLDivElement).style.width = "calc(100% - 320px)";

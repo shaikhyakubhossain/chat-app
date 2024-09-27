@@ -27,8 +27,8 @@ export default function LeftMenu(): JSX.Element {
         customTW = '';
 
         const currentConversationCard = (event.currentTarget) as HTMLDivElement;
-        prevConversationCard?.classList.remove("bg-teal-200");
-        currentConversationCard?.classList.add("bg-teal-200");
+        prevConversationCard?.classList.remove("bg-gray-200");
+        currentConversationCard?.classList.add("bg-gray-200");
 
         dispatch(setTitle(item.name));
         dispatch(setStatus(item.status));
