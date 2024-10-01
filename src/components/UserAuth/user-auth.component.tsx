@@ -7,6 +7,7 @@ import { getUrl } from "@/utils/urls";
 
 import { useDispatch } from "react-redux";
 import { setDetail } from "@/lib/features/AuthDetail/authDetailSlice";
+import { setShowLoadingTrue, setShowLoadingFalse } from "@/lib/features/MainLoading/mainLoadingSlice";
 
 type dataToSendType = {
   username: string;
@@ -27,6 +28,7 @@ export default function UserAuth(): JSX.Element {
 
   const handleLoginOrSignUp = (dataToSend: dataToSendType) => {
     setShowLoading(true);
+    dispatch(setShowLoadingTrue());
       fetch(`${getUrl()}/${authType}`, {
         method: "POST",
         headers: {
@@ -42,6 +44,7 @@ export default function UserAuth(): JSX.Element {
           console.log(data);
           setResponseData(data);
           setShowLoading(false);
+          dispatch(setShowLoadingFalse());
           if(!data.error){
             dispatch(setDetail(data))
             localStorage.setItem("authDetail", JSON.stringify(data));
@@ -50,6 +53,8 @@ export default function UserAuth(): JSX.Element {
       })
       .catch((err) => {
         console.log("err", err);
+        setShowLoading(false);
+        dispatch(setShowLoadingFalse());
       });
   };
 
