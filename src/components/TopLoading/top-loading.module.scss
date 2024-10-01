@@ -1,0 +1,12 @@
+.mainContainer {
+    z-index: 5;
+}
+
+.widthFull {
+    width: 100%;
+    transition: width 5s ease-in-out;
+}
+
+.widthZero {
+    width: 0%;
+}
