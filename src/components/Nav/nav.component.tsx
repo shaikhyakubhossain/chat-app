@@ -39,8 +39,8 @@ export default function Nav(): JSX.Element {
         <div className='flex'>
             <div className='my-auto mx-2'><Btn onClick={handleLogout} customTW='bg-gray-50 dark:bg-gray-700 hover:bg-pink-800 px-4 py-2 text-sm'>Logout</Btn></div>
             {username ? <div className={`${styles.username} flex text-center`}>
-                <div className={'w-11 h-11 rounded-full bg-slate-500 my-auto'}><div className='text-white text-2xl'>{username[0]}</div></div>
-                <div className='my-auto'>{username}</div>
+                <div className={'w-11 h-11 rounded-full bg-slate-500 '}><div className='text-white text-2xl'>{username[0]}</div></div>
+                <div className=''>{username}</div>
             </div> : null}
             <div></div>
         </div>
