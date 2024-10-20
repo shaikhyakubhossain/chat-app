@@ -51,21 +51,21 @@ export default function MainChat(): JSX.Element {
     }
 
     const handleScrollToBottom = () => {
-        if(containerOfMessageOutputRef.current?.children[0]){
-            containerOfMessageOutputRef.current.children[0].scrollTop = containerOfMessageOutputRef.current?.children[0].scrollHeight;
+        if(containerOfMessageOutputRef.current?.children[1]){
+            containerOfMessageOutputRef.current.children[1].scrollTop = containerOfMessageOutputRef.current?.children[1].scrollHeight;
         }
     }
 
     return (
-        <div className={`${styles.mainContainer} text-center mx-auto`} ref={containerOfMessageOutputRef}>
-            {ws ? <ChatBox serverMessage={messagesList} /> : <div className="mb-auto bg-lime-600 text-white rounded p-2">Connecting to the server...</div>}
+        <div className={`${styles.mainContainer} mx-auto`} ref={containerOfMessageOutputRef}>
+            <div>
+                    {clientsOnline && <span className="bg-slate-500 text-white rounded p-2 mx-2">{clientsOnline} {parseInt(clientsOnline) > 1 ? "clients online" : "client online"}</span>}
+            </div>
+            {ws ? <ChatBox serverMessage={messagesList} /> : <div className="mb-auto bg-lime-600 text-white text-center rounded p-2">Connecting to the server...</div>}
             <div className='flex justify-center '>
                 <div ref={containerOfInputRef} className="w-3/4 mx-auto">
                     <div className={`${styles.messageTooLongError} mb-auto bg-red-500 text-white rounded p-2`}>Message too long, max 250 characters</div>
                     <MessageInput sendMessageFunction={sendMessage}/>
-                </div>
-                <div>
-                    {clientsOnline && <div className="bg-slate-500 text-white rounded p-2">Clients Online: {clientsOnline}</div>}
                 </div>
             </div>
         </div>
