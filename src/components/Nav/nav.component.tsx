@@ -18,7 +18,6 @@ export default function Nav(): JSX.Element {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log();
     }, [title, status, username]);
 
     const handleLogout = () => {

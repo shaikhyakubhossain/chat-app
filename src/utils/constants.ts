@@ -6,7 +6,7 @@ export const conversationsList = [
         type: 'group'
     },
     {
-        name: 'test',
+        name: 'testing',
         status: 'online',
         type: 'group'
     },
