@@ -1,6 +1,6 @@
 "use client"
-import { useEffect } from 'react';
 import styles from './nav.module.scss';
+import { useState } from 'react';
 import { backArrow } from '@/utils/icons';
 import Btn from '../Btn/btn.component';
 
@@ -15,10 +15,9 @@ export default function Nav(): JSX.Element {
     const status = useSelector((state: RootState) => state.navActiveChat.status);
     const username = useSelector((state: RootState) => state.authDetail.username);
 
-    const dispatch = useDispatch();
+    const [dropDown, setDropDown] = useState(false);
 
-    useEffect(() => {
-    }, [title, status, username]);
+    const dispatch = useDispatch();
 
     const handleLogout = () => {
         localStorage.removeItem("authDetail");
@@ -35,13 +34,15 @@ export default function Nav(): JSX.Element {
                 <div className={`${styles.status} text-slate-500`}>{status}</div>
             </div>
         </div>
-        <div className='flex'>
-            <div className='my-auto mx-2'><Btn onClick={handleLogout} customTW='bg-gray-50 dark:bg-gray-700 hover:bg-pink-800 px-4 py-2 text-sm'>Logout</Btn></div>
+        <div className='flex relative'>
+            <div className='my-auto mx-2 max-[550px]:hidden'><Btn onClick={handleLogout} customTW='bg-gray-50 dark:bg-gray-700 hover:bg-pink-800 px-4 py-2 text-sm'>Logout</Btn></div>
             {username ? <div className={`${styles.username} flex text-center`}>
-                <div className={'w-11 h-11 rounded-full bg-slate-500 '}><div className='text-white text-2xl'>{username[0]}</div></div>
-                <div className=''>{username}</div>
+                <div onClick={(event) => window.innerWidth >= 550 ? null : setDropDown(!dropDown)} className={'w-11 h-11 rounded-full bg-slate-500 '}><span className='text-white text-2xl'>{username[0]}</span></div>
+                <div className='max-[550px]:hidden'>{username}</div>
             </div> : null}
-            <div></div>
+            <div className={`absolute ${dropDown ? 'flex' : 'hidden'} flex-col top-20 right-0 w-36 h-60 bg-white z-10`}>
+                <div className='mx-auto'><Btn onClick={handleLogout} customTW='bg-gray-50 dark:bg-gray-700 hover:bg-pink-800 px-4 py-2 text-sm'>Logout</Btn></div>
+            </div>
         </div>
         </div>
     )
