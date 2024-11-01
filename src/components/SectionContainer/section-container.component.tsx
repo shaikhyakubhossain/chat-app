@@ -62,12 +62,12 @@ export default function SectionContainer(): JSX.Element {
         ).style.display = "flex";
 
         if (isOpen) {
-          (
-            sectionContainerRef.current?.children[0] as HTMLDivElement
-          ).style.width = "180px";
-          (
-            sectionContainerRef.current?.children[1] as HTMLDivElement
-          ).style.width = "calc(100% - 180px)";
+          // (
+          //   sectionContainerRef.current?.children[0] as HTMLDivElement
+          // ).style.width = "180px";
+          // (
+          //   sectionContainerRef.current?.children[1] as HTMLDivElement
+          // ).style.width = "calc(100% - 180px)";
         } else {
           (
             sectionContainerRef.current?.children[0] as HTMLDivElement
