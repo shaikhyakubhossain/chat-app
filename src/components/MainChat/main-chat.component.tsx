@@ -1,11 +1,18 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styles from './main-chat.module.scss';
 import ChatBox from "../ChatBox/chat-box.component";
 import MessageInput from "../MessageInput/message-input.component";
 import useWebSocket from "@/hooks/WebSocket/useWebSocket";
 
+import { RootState } from "@/lib/store";
+import { useSelector } from "react-redux";
+
 export default function MainChat(): JSX.Element {
+
+    const { title } = useSelector((state: RootState) => state.navActiveChat);
+    const { token } = useSelector((state: RootState) => state.authDetail);
+    
     const { messagesList, clientsOnline, ws } = useWebSocket();
 
     const containerOfMessageOutputRef = useRef<null | HTMLDivElement>(null);
@@ -16,7 +23,7 @@ export default function MainChat(): JSX.Element {
         return () => {
             document.removeEventListener("keyup", handleKeydown, true);
         }
-    }, [ws]);
+    }, [ws, title]);
 
     useEffect(() => {
         handleScrollToBottom();
@@ -33,7 +40,7 @@ export default function MainChat(): JSX.Element {
             const inputValue = (containerOfInputRef.current?.children[1].children[0] as HTMLInputElement);
             // console.log(inputValue.value)
             if(ws && containerOfInputRef.current?.children[1].children[0] && inputValue.value !== ""){
-                ws.send(inputValue.value);
+                ws.send(JSON.stringify({message: inputValue.value, to: title, token}));
                 inputValue.value = "";
                 // console.log(inputValue.value);
             }

@@ -40,7 +40,6 @@ const useWebSocket = () => {
     socket.onmessage = (event) => {
       let data: webSocketDateType = JSON.parse(event.data);
       if (data.type === "message") {
-        // console.log("message", data);
         setMessagesList((prev) => [
           ...prev,
           { sentBy: data.client, message: data.data },

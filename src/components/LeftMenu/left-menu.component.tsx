@@ -74,7 +74,7 @@ export default function LeftMenu(): JSX.Element {
                 }
             )
             :
-            <div>loading</div>
+            <div className='flex items-center justify-center text-center'><div className='w-11 h-11 rounded-s-lg bg-green-500 my-auto animate-spin'></div></div>
             }
         </div>
     )
