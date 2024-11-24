@@ -14,7 +14,7 @@ export default function MainChat(): JSX.Element {
     const { title } = useSelector((state: RootState) => state.navActiveChat);
     const { token } = useSelector((state: RootState) => state.authDetail);
     
-    const { messagesList, clientsOnline, ws, clearMessagesList } = useWebSocket();
+    const { messagesList, clientsOnline, ws, clearMessagesList, modifyMessageList } = useWebSocket();
 
     const containerOfMessageOutputRef = useRef<null | HTMLDivElement>(null);
     const containerOfInputRef = useRef<null | HTMLDivElement>(null);
@@ -28,6 +28,7 @@ export default function MainChat(): JSX.Element {
 
     useEffect(() => {
         handleScrollToBottom();
+        console.log(messagesList);
     }, [messagesList]);
 
     useEffect(() => {
@@ -48,7 +49,8 @@ export default function MainChat(): JSX.Element {
                 friendName: title
             })
         }).then(res => res.json()).then(data => {
-            console.log(data);
+            console.log(data.data);
+            modifyMessageList(data.data);
         })
     }
 
