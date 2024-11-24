@@ -13,7 +13,7 @@ export default function MainChat(): JSX.Element {
     const { title } = useSelector((state: RootState) => state.navActiveChat);
     const { token } = useSelector((state: RootState) => state.authDetail);
     
-    const { messagesList, clientsOnline, ws } = useWebSocket();
+    const { messagesList, clientsOnline, ws, clearMessagesList } = useWebSocket();
 
     const containerOfMessageOutputRef = useRef<null | HTMLDivElement>(null);
     const containerOfInputRef = useRef<null | HTMLDivElement>(null);
@@ -28,6 +28,10 @@ export default function MainChat(): JSX.Element {
     useEffect(() => {
         handleScrollToBottom();
     }, [messagesList]);
+
+    useEffect(() => {
+        clearMessagesList();
+    }, [title]);
 
     const handleKeydown = (event: KeyboardEvent) => {
         if(event.key === "Enter"){
@@ -66,7 +70,7 @@ export default function MainChat(): JSX.Element {
     return (
         <div className={`${styles.mainContainer} mx-auto`} ref={containerOfMessageOutputRef}>
             <div>
-                    {clientsOnline && <span className="bg-slate-500 text-white rounded p-2 mx-2">{clientsOnline} {parseInt(clientsOnline) > 1 ? "clients online" : "client online"}</span>}
+                    {title === "Public group chat" && clientsOnline && <span className="bg-slate-500 text-white rounded p-2 mx-2">{clientsOnline} {parseInt(clientsOnline) > 1 ? "clients online" : "client online"}</span>}
             </div>
             {ws ? <ChatBox serverMessage={messagesList} /> : <div className="mb-auto bg-lime-600 text-white text-center rounded p-2">Connecting to the server...</div>}
             <div className='flex justify-center '>

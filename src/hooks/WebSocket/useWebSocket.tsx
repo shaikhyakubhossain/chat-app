@@ -62,11 +62,16 @@ const useWebSocket = () => {
     socket.send(JSON.stringify(messageData));
   };
 
+  const clearMessagesList = () => {
+    setMessagesList([]);
+  };
+
   return {
     ws,
     messagesList,
     clientsOnline,
     sendMessage,
+    clearMessagesList
   };
 };
 
