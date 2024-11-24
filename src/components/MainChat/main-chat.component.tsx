@@ -4,6 +4,7 @@ import styles from './main-chat.module.scss';
 import ChatBox from "../ChatBox/chat-box.component";
 import MessageInput from "../MessageInput/message-input.component";
 import useWebSocket from "@/hooks/WebSocket/useWebSocket";
+import { getUrl } from "@/utils/urls";
 
 import { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
@@ -31,7 +32,25 @@ export default function MainChat(): JSX.Element {
 
     useEffect(() => {
         clearMessagesList();
+        if(title !== "Public group chat"){
+            fetchPrivateMessages();
+        }
     }, [title]);
+
+    const fetchPrivateMessages = () => {
+        const data = fetch(`${getUrl()}/get-messages`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorization': `bearer ${token}`
+            },
+            body: JSON.stringify({
+                friendName: title
+            })
+        }).then(res => res.json()).then(data => {
+            console.log(data);
+        })
+    }
 
     const handleKeydown = (event: KeyboardEvent) => {
         if(event.key === "Enter"){

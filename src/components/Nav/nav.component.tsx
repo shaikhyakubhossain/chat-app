@@ -26,7 +26,7 @@ export default function Nav(): JSX.Element {
 
     return (
         <div className={`${styles.navContainer} flex justify-between bg-white h-16 text-black px-4`}>
-        <div className='flex'>
+        <div className='flex items-center'>
             <Btn customClass={`${styles.backArrowBtn}`} onClick={() => dispatch(toggle())} customTW='hover:bg-slate-200'><div className={`${styles.backArrow} w-6 h-6`}><img src={backArrow} alt="" /></div></Btn>
             <div className={'w-11 h-11 rounded-full bg-slate-500 my-auto'}></div>
             <div className={`${styles.titleAndStatusContainer} ml-4`}>
