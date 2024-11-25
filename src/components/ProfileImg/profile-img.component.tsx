@@ -10,6 +10,7 @@ type propsType = {
 export default function ProfileImg(props: propsType): JSX.Element {
   return (
     <div
+      onClick={props.onClick}
       className={`${styles.mainContainer} flex justify-center items-center min-w-11 min-h-11 rounded-full bg-slate-500 my-auto`}
     >
       {props.profileImg ? (
