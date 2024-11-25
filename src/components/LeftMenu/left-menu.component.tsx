@@ -6,15 +6,10 @@ import { getUrl } from '@/utils/urls';
 
 import { useDispatch } from 'react-redux';
 import { setTitle, setStatus, setType } from '@/lib/features/navActiveChat/navActiveChatSlice';
+import { setDetail } from '@/lib/features/AuthDetail/authDetailSlice';
 import { setTrue } from '@/lib/features/MainMobileWindow/mainMobileWindowSlice';
 import { RootState } from '@/lib/store';
 import { useSelector } from 'react-redux';
-
-// type  itemType = {
-//     name: string,
-//     status: string,
-//     type: string
-// }
 
 let prevConversationCard: null | HTMLDivElement = null;
 
@@ -37,8 +32,13 @@ export default function LeftMenu(): JSX.Element {
             },
         } 
     ).then(res => res.json()).then(data => {
-            // console.log(data.data);
+        if(data.error){
+            localStorage.removeItem("authDetail");
+            dispatch(setDetail({username: null, token: null}));
+        }
+        else{
             setData(data.data);
+        }
         })
     }
 
