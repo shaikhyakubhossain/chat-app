@@ -9,7 +9,6 @@ type propsType = {
 }
 
 export default function ProfileImg(props: propsType): JSX.Element {
-    console.log(props.size);
   return (
     <div
       className={`${styles.mainContainer} flex justify-center items-center w- min-w-${props.size ? "" + props.size : "11"} min-h-${props.size ? "" + props.size : "11"} rounded-full bg-slate-500 my-auto`}

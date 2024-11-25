@@ -29,7 +29,7 @@ export default function Nav(): JSX.Element {
         <div className={`${styles.navContainer} flex justify-between bg-white h-16 text-black px-4`}>
         <div className='flex items-center'>
             <Btn customClass={`${styles.backArrowBtn}`} onClick={() => dispatch(toggle())} customTW='hover:bg-slate-200'><div className={`${styles.backArrow} w-6 h-6`}><img src={backArrow} alt="" /></div></Btn>
-            <ProfileImg title={username} size={14} />
+            <ProfileImg title={title} size={14} />
             <div className={`${styles.titleAndStatusContainer} ml-4`}>
                 <div className={`${styles.title} font-bold`}>{title}</div>
                 <div className={`${styles.status} text-slate-500`}>{status}</div>
