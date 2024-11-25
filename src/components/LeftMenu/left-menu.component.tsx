@@ -37,7 +37,7 @@ export default function LeftMenu(): JSX.Element {
             },
         } 
     ).then(res => res.json()).then(data => {
-            console.log(data.data);
+            // console.log(data.data);
             setData(data.data);
         })
     }

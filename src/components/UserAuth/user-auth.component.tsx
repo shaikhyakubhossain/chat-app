@@ -41,7 +41,7 @@ export default function UserAuth(): JSX.Element {
         }),
       }).then((res) => {
         res.json().then((data) => {
-          console.log(data);
+          // console.log(data);
           setResponseData(data);
           setShowLoading(false);
           dispatch(setShowLoadingFalse());
@@ -52,7 +52,7 @@ export default function UserAuth(): JSX.Element {
         });
       })
       .catch((err) => {
-        console.log("err", err);
+        // console.log("err", err);
         setShowLoading(false);
         dispatch(setShowLoadingFalse());
       });

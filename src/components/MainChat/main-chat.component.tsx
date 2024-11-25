@@ -28,7 +28,7 @@ export default function MainChat(): JSX.Element {
 
     useEffect(() => {
         handleScrollToBottom();
-        console.log(messagesList);
+        // console.log(messagesList);
     }, [messagesList]);
 
     useEffect(() => {
@@ -49,7 +49,7 @@ export default function MainChat(): JSX.Element {
                 friendName: title
             })
         }).then(res => res.json()).then(data => {
-            console.log("fetched new");
+            // console.log("fetched new");
             modifyMessageList(data.data);
         })
     }
@@ -78,7 +78,7 @@ export default function MainChat(): JSX.Element {
             setTimeout(() => {
                 (containerOfInputRef.current?.children[0] as HTMLDivElement).style.display = "none";
             }, 2000)
-            console.log("message too long");
+            // console.log("message too long");
         }
     }
 

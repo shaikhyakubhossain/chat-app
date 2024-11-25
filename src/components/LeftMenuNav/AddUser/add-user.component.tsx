@@ -15,7 +15,7 @@ export default function AddUser(props: propsType): JSX.Element {
         if(searchUsername === "") {
             return;
         }
-        console.log(props.token);
+        // console.log(props.token);
         fetch(`${getUrl()}/add-friend`, {
             method: 'PATCH',
             headers: {
