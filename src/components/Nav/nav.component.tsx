@@ -44,7 +44,6 @@ export default function Nav(): JSX.Element {
             </div> : null}
             <div className={`absolute ${dropDown ? 'flex' : 'hidden'} flex-col top-20 right-0 w-36 h-60 bg-green-200 z-10`}>
                 <div className='mx-auto my-2'><Btn onClick={handleLogout} customTW='bg-gray-50 dark:bg-gray-700 hover:bg-pink-800 px-4 py-2 text-sm'>Logout</Btn></div>
-                <div className='mx-auto my-2'><Link href={'https://github.com/shaikhyakubhossain'}><Btn customTW='bg-gray-50 dark:bg-gray-700 hover:bg-pink-800 px-4 py-2 text-sm'>Github</Btn></Link></div>
             </div>
         </div>
         </div>
