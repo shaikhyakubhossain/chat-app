@@ -42,7 +42,8 @@ export default function Nav(): JSX.Element {
                 <ProfileImg title={username} onClick={() => window.innerWidth >= 550 ? null : setDropDown(!dropDown)} />
                 <div className='max-[550px]:hidden'>{username}</div>
             </div> : null}
-            <div className={`absolute ${dropDown ? 'flex' : 'hidden'} flex-col top-20 right-0 w-36 h-60 bg-green-200 z-10`}>
+            <div className={`absolute ${dropDown ? 'flex' : 'hidden'} flex-col top-20 right-0 w-36 h-60 rounded-md p-1 bg-green-400 z-10`}>
+                <div className='text-center font-semibold bg-white rounded'>{username}</div>
                 <div className='mx-auto my-2'><Btn onClick={handleLogout} customTW='bg-gray-50 dark:bg-gray-700 hover:bg-pink-800 px-4 py-2 text-sm'>Logout</Btn></div>
             </div>
         </div>
