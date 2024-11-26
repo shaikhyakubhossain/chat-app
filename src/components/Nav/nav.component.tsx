@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { backArrow } from '@/utils/icons';
 import Btn from '../Btn/btn.component';
 import ProfileImg from '../ProfileImg/profile-img.component';
-import Link from 'next/link';
 
 import type { RootState } from '@/lib/store';
 import { useSelector, useDispatch } from 'react-redux';
