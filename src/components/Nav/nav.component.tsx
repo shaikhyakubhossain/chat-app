@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { backArrow } from '@/utils/icons';
 import Btn from '../Btn/btn.component';
 import ProfileImg from '../ProfileImg/profile-img.component';
+import Link from 'next/link';
 
 import type { RootState } from '@/lib/store';
 import { useSelector, useDispatch } from 'react-redux';
@@ -36,13 +37,13 @@ export default function Nav(): JSX.Element {
             </div>
         </div>
         <div className='flex relative'>
-            <div className='my-auto mx-2 max-[550px]:hidden'><Btn onClick={handleLogout} customTW='bg-gray-50 dark:bg-gray-700 hover:bg-pink-800 px-4 py-2 text-sm'>Logout</Btn></div>
-            {username ? <div className={`${styles.username} flex text-center`}>
-                <ProfileImg title={username} onClick={() => window.innerWidth >= 550 ? null : setDropDown(!dropDown)} />
+            {username ? <div className={`${styles.username} flex text-center cursor-pointer`} onClick={() => setDropDown(!dropDown)}>
+                <ProfileImg title={username}  />
                 <div className='max-[550px]:hidden'>{username}</div>
             </div> : null}
-            <div className={`absolute ${dropDown ? 'flex' : 'hidden'} flex-col top-20 right-0 w-36 h-60 rounded-md p-1 bg-green-400 z-10`}>
-                <div className='text-center font-semibold bg-white rounded'>{username}</div>
+            <div className={`absolute ${dropDown ? 'flex' : 'hidden'} flex-col top-20 right-0 w-36 rounded-md p-1 bg-slate-300 z-10`}>
+                <div className='text-center font-semibold bg-white rounded min-[550px]:hidden'>{username}</div>
+                <div className='mx-auto my-2'><Link href="https://github.com/shaikhyakubhossain/chat-app"><Btn customTW='bg-gray-50 dark:bg-gray-700 hover:bg-pink-800 px-4 py-2 text-sm'>Source Code</Btn></Link></div>
                 <div className='mx-auto my-2'><Btn onClick={handleLogout} customTW='bg-gray-50 dark:bg-gray-700 hover:bg-pink-800 px-4 py-2 text-sm'>Logout</Btn></div>
             </div>
         </div>
