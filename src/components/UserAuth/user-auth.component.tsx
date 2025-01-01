@@ -1,8 +1,9 @@
 "use client";
 import styles from "./user-auth.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import AuthInput from "../AuthInput/auth-input.component";
 import Btn from "../Btn/btn.component";
+import Toast from "../Toast/toast.component";
 import { getUrl } from "@/utils/urls";
 
 import { useDispatch } from "react-redux";
@@ -14,20 +15,15 @@ type dataToSendType = {
   password: string;
 };
 
-type responseDataType = {
-  error: string;
-}
-
 export default function UserAuth(): JSX.Element {
 
   const dispatch = useDispatch();
 
   const [authType, setAuthType] = useState<null | string>("login");
-  const [responseData, setResponseData] = useState<responseDataType | null>(null);
-  const [showLoading, setShowLoading] = useState<boolean>(false)
+  const [toast, setToast] = useState<boolean>(false);
+  const serverMessageRef = useRef<string | null>(null);
 
   const handleLoginOrSignUp = (dataToSend: dataToSendType) => {
-    setShowLoading(true);
     dispatch(setShowLoadingTrue());
       fetch(`${getUrl()}/${authType}`, {
         method: "POST",
@@ -41,19 +37,19 @@ export default function UserAuth(): JSX.Element {
         }),
       }).then((res) => {
         res.json().then((data) => {
-          // console.log(data);
-          setResponseData(data);
-          setShowLoading(false);
           dispatch(setShowLoadingFalse());
           if(!data.error){
             dispatch(setDetail(data))
             localStorage.setItem("authDetail", JSON.stringify(data));
           }
+          else{
+            serverMessageRef.current = data.error;
+            setToast(true);
+          }
         });
       })
       .catch((err) => {
         // console.log("err", err);
-        setShowLoading(false);
         dispatch(setShowLoadingFalse());
       });
   };
@@ -68,6 +64,7 @@ export default function UserAuth(): JSX.Element {
 
   return (
     <div className={`${styles.mainContainer} w-3/4 m-auto`}>
+    <Toast show={toast} message={serverMessageRef.current} hide={() => setToast(false)} />
       <div className="font-bold text-5xl text-center mb-4">
         Welcome to Chat App!
       </div>
@@ -89,7 +86,7 @@ export default function UserAuth(): JSX.Element {
           </Btn>
         </div>
       </div>
-      {<AuthInput type={authType} submit={handleLoginOrSignUp} error={responseData?.error ? responseData.error : null} isLoading={showLoading} />}
+      {<AuthInput type={authType} submit={handleLoginOrSignUp}/>}
     </div>
   );
 }

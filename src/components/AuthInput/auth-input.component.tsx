@@ -12,8 +12,6 @@ type dataToSendType = {
 type propsType = {
     type: string | null,
     submit: ({username, password}: dataToSendType) => void,
-    error?: string | null,
-    isLoading: boolean
 }
 
 const AuthInput = (props: propsType) => {
@@ -39,8 +37,6 @@ const AuthInput = (props: propsType) => {
                         <label className="block my-1 text-sm font-medium text-gray-900">Username</label>
                         <input onChange={(e) => setDataToSend({...dataToSend, username: e.target.value})} type="text" id="username" className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`} placeholder="username" required />
                     </div> 
-                    <div className={`${props.error ? 'block' : 'hidden'} text-red-800`}>{props.error}</div>
-                    <div className={`${props.isLoading ? 'block' : 'hidden'} text-green-800`}>Loading</div>
                     <div className="my-4">
                         <label className="block my-1 text-sm font-medium text-gray-900">Password</label>
                         <input onChange={(e) => setDataToSend({...dataToSend, password: e.target.value})} type="password" id="password" className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500`} placeholder="password" required />
@@ -59,7 +55,7 @@ const AuthInput = (props: propsType) => {
                     }
                 </div>
                 <div className='flex justify-center'>
-                <Btn customTW='bg-pink-500' disabled={props.isLoading} onClick={handleSubmit}>{props.type === 'login' ? 'Login' : 'Register'}</Btn>
+                <Btn customTW='bg-pink-500' onClick={handleSubmit}>{props.type === 'login' ? 'Login' : 'Register'}</Btn>
             </div>
         </div>
     )
