@@ -11,8 +11,7 @@ type propsType = {
 export default function AddUser(props: propsType): JSX.Element {
 
     const [searchUsername, setSearchUsername] = useState<string>("");
-    const [toast, setToast] = useState<boolean>(false);
-    const serverMessageRef = useRef<string | null>(null)
+    const [toast, setToast] = useState({ show: false, message: "" });
 
     const handleSearch = () => {
         if(searchUsername === "") {
@@ -29,14 +28,13 @@ export default function AddUser(props: propsType): JSX.Element {
                 searchUsername
             })
         }).then(res => res.json()).then(data => {
-            serverMessageRef.current = data.message
-            setToast(true);
+            setToast({ show: true, message: data.message });
         })
     }
 
     return (
         <div className="flex my-auto">
-            <Toast show={toast} message={serverMessageRef.current} hide={() => setToast(false)} />
+            <Toast show={toast.show} message={toast.message} hide={() => setToast({ show: false, message: "" })} />
             <input onChange={(e) => setSearchUsername(e.target.value)} className='my-auto w-28 h-6 text-black bg-slate-200 rounded-lg p-3 placeholder:text-black mx-1' type="text" placeholder='Add Friend' />
             <Btn onClick={handleSearch} customTW='bg-gray-50 dark:bg-gray-700 hover:bg-pink-800'>Add</Btn>
         </div>

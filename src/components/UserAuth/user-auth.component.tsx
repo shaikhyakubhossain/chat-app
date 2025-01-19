@@ -20,8 +20,7 @@ export default function UserAuth(): JSX.Element {
   const dispatch = useDispatch();
 
   const [authType, setAuthType] = useState<null | string>("login");
-  const [toast, setToast] = useState<boolean>(false);
-  const serverMessageRef = useRef<string | null>(null);
+  const [toast, setToast] = useState({ show: false, message: "" });
 
   const handleLoginOrSignUp = (dataToSend: dataToSendType) => {
     dispatch(setShowLoadingTrue());
@@ -43,8 +42,7 @@ export default function UserAuth(): JSX.Element {
             localStorage.setItem("authDetail", JSON.stringify(data));
           }
           else{
-            serverMessageRef.current = data.error;
-            setToast(true);
+            setToast({ show: true, message: data.error });
           }
         });
       })
@@ -64,7 +62,7 @@ export default function UserAuth(): JSX.Element {
 
   return (
     <div className={`${styles.mainContainer} w-3/4 m-auto`}>
-    <Toast show={toast} message={serverMessageRef.current} hide={() => setToast(false)} />
+    <Toast show={toast.show} message={toast.message} hide={() => setToast({ show: false, message: "" })} />
       <div className="font-bold text-5xl text-center mb-4">
         Welcome to Chat App!
       </div>
