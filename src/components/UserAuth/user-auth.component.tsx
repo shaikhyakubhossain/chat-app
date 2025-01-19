@@ -1,6 +1,6 @@
 "use client";
 import styles from "./user-auth.module.scss";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import AuthInput from "../AuthInput/auth-input.component";
 import Btn from "../Btn/btn.component";
 import Toast from "../Toast/toast.component";

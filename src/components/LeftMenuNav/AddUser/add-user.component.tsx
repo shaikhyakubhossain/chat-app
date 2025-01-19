@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { getUrl } from "@/utils/urls";
 import Btn from "@/components/Btn/btn.component";
 import Toast from "@/components/Toast/toast.component";
