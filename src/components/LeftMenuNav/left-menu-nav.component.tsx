@@ -1,5 +1,4 @@
 "use client"
-import { useEffect } from 'react';
 import styles from './left-menu-nav.module.scss';
 import { menuIcon } from '@/utils/icons';
 import Btn from '../Btn/btn.component';
@@ -18,13 +17,13 @@ export default function LeftMenuNav(): JSX.Element {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        // console.log(isOpen);
-    }, [isOpen])
+    // useEffect(() => {
+    //     // console.log(isOpen);
+    // }, [isOpen])
 
     return (
-        <div className={`${styles.mainContainer} flex px-2 w-full justify-between h-16 text-black bg-white`}>
-            <Btn onClick={() => dispatch(toggle())} customClass={styles.menuIcon} customTW='hover:bg-slate-200'><img className={`${styles.menuIconImg} w-6 h-6`} src={menuIcon} alt="" /></Btn>
+        <div className={`${styles.mainContainer} flex items-center px-2 w-full justify-between h-16 text-black bg-white`}>
+            <div className=''><Btn onClick={() => dispatch(toggle())} customClass={styles.menuIcon} customTW='hover:bg-slate-200'><img className={`${styles.menuIconImg} w-6 h-6`} src={menuIcon} alt="" /></Btn></div>
             <AddUser token={token} />
         </div>
     )
