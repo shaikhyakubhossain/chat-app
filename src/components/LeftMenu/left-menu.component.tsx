@@ -5,7 +5,7 @@ import ConversationCard from '../ConversationCard/conversation-card.component';
 import { getUrl } from '@/utils/urls';
 
 import { useDispatch } from 'react-redux';
-import { setTitle, setStatus, setType } from '@/lib/features/navActiveChat/navActiveChatSlice';
+import { setTitle, setStatus, setType } from '@/lib/features/NavActiveChat/navActiveChatSlice';
 import { setDetail } from '@/lib/features/AuthDetail/authDetailSlice';
 import { setTrue } from '@/lib/features/MainMobileWindow/mainMobileWindowSlice';
 import { RootState } from '@/lib/store';
@@ -16,6 +16,7 @@ let prevConversationCard: null | HTMLDivElement = null;
 export default function LeftMenu(): JSX.Element {
 
     const { token } = useSelector((state: RootState) => state.authDetail);
+    const { rerenderFriendList } = useSelector((state: RootState) => state.triggerComponentRerender)
 
     let customTW = '';
 
@@ -60,7 +61,7 @@ export default function LeftMenu(): JSX.Element {
 
     useEffect(() => {
         getFriends();
-    }, [])
+    }, [rerenderFriendList])
 
     return (
         <div className={`${styles.mainContainer}`}>

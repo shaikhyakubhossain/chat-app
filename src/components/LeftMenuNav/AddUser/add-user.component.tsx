@@ -4,11 +4,16 @@ import { getUrl } from "@/utils/urls";
 import Btn from "@/components/Btn/btn.component";
 import Toast from "@/components/Toast/toast.component";
 
+import { useDispatch } from "react-redux";
+import { toggleFriendListRerender } from "@/lib/features/TriggerComponentRerender/triggerComponentRerender";
+
 type propsType = {
     token: string | null
 }
 
 export default function AddUser(props: propsType): JSX.Element {
+
+    const dispatch = useDispatch();
 
     const [searchUsername, setSearchUsername] = useState<string>("");
     const [toast, setToast] = useState({ show: false, message: "" });
@@ -29,6 +34,7 @@ export default function AddUser(props: propsType): JSX.Element {
             })
         }).then(res => res.json()).then(data => {
             setToast({ show: true, message: data.message });
+            dispatch(toggleFriendListRerender());
         })
     }
 
