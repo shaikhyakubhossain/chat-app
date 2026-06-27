@@ -14,5 +14,5 @@ export default function Loading(){
         return () => {
             dispatch(setShowLoadingFalse());
         }
-    },[])
+    },[dispatch])
 }
