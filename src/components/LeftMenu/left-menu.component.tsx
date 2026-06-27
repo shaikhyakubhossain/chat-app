@@ -17,6 +17,7 @@ export default function LeftMenu(): JSX.Element {
 
     const { token } = useSelector((state: RootState) => state.authDetail);
     const { rerenderFriendList } = useSelector((state: RootState) => state.triggerComponentRerender)
+    const { clientsOnline } = useSelector((state: RootState) => state.navBarActiveChat);
 
     let customTW = '';
 
@@ -52,7 +53,7 @@ export default function LeftMenu(): JSX.Element {
         currentConversationCard?.classList.add("bg-gray-200");
 
         dispatch(setTitle(item));
-        dispatch(setStatus("online"));
+        dispatch(setStatus(item === "Public group chat" ? `${clientsOnline} Online` : "Offline"));
         dispatch(setType("personal"));
         dispatch(setTrue());
 

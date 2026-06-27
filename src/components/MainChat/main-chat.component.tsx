@@ -8,8 +8,13 @@ import { getUrl } from "@/utils/urls";
 
 import { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux';
+import { setClientsOnline } from "@/lib/features/NavBarActiveChat/navBarActiveChatSlice";
+
 
 export default function MainChat(): JSX.Element {
+
+    const dispatch = useDispatch();
 
     const { title } = useSelector((state: RootState) => state.navBarActiveChat);
     const { token } = useSelector((state: RootState) => state.authDetail);
@@ -37,6 +42,10 @@ export default function MainChat(): JSX.Element {
             fetchPrivateMessages();
         }
     }, [title]);
+
+    useEffect(() => {
+        dispatch(setClientsOnline(clientsOnline));
+    }, [clientsOnline, dispatch]);
 
     const fetchPrivateMessages = () => {
         const data = fetch(`${getUrl()}/get-messages`, {
@@ -90,9 +99,9 @@ export default function MainChat(): JSX.Element {
 
     return (
         <div className={`${styles.mainContainer} mx-auto`} ref={containerOfMessageOutputRef}>
-            <div>
-                    {title === "Public group chat" && clientsOnline && <span className="bg-slate-500 text-white rounded p-2 mx-2">{clientsOnline} {parseInt(clientsOnline) > 1 ? "clients online" : "client online"}</span>}
-            </div>
+            {/* <div>
+                    {title === "Public group chat" && clientsOnline && <span className="bg-slate-500 text-white rounded p-2 mx-2">{clientsOnline} online</span>}
+            </div> */}
             {ws ? <ChatBox serverMessage={messagesList} /> : <div className="mb-auto bg-lime-600 text-white text-center rounded p-2">Connecting to the server...</div>}
             <div className='flex justify-center '>
                 <div ref={containerOfInputRef} className="w-3/4 mx-auto">
