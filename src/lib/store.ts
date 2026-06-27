@@ -1,7 +1,7 @@
 'use client';
 import { configureStore } from "@reduxjs/toolkit";
 import mainMobileWindowSlice from "./features/MainMobileWindow/mainMobileWindowSlice";
-import navActiveChatSlice from "./features/NavActiveChat/navActiveChatSlice";
+import navBarActiveChatSlice from "./features/NavBarActiveChat/navBarActiveChatSlice";
 import authDetailSlice from './features/AuthDetail/authDetailSlice';
 import mainLoadingSlice from "./features/MainLoading/mainLoadingSlice";
 import triggerComponentRerenderSlice from "./features/TriggerComponentRerender/triggerComponentRerender";
@@ -9,7 +9,7 @@ import triggerComponentRerenderSlice from "./features/TriggerComponentRerender/t
 export const store = configureStore({
     reducer: {
         mainMobileWindow: mainMobileWindowSlice,
-        navActiveChat: navActiveChatSlice,
+        navBarActiveChat: navBarActiveChatSlice,
         authDetail: authDetailSlice,
         mainLoading: mainLoadingSlice,
         triggerComponentRerender: triggerComponentRerenderSlice

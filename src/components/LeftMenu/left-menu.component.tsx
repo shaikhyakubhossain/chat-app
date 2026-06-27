@@ -5,7 +5,7 @@ import ConversationCard from '../ConversationCard/conversation-card.component';
 import { getUrl } from '@/utils/urls';
 
 import { useDispatch } from 'react-redux';
-import { setTitle, setStatus, setType } from '@/lib/features/NavActiveChat/navActiveChatSlice';
+import { setTitle, setStatus, setType } from '@/lib/features/NavBarActiveChat/navBarActiveChatSlice';
 import { setDetail } from '@/lib/features/AuthDetail/authDetailSlice';
 import { setTrue } from '@/lib/features/MainMobileWindow/mainMobileWindowSlice';
 import { RootState } from '@/lib/store';

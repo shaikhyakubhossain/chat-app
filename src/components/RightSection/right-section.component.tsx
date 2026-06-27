@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 export default function RightSection(): JSX.Element {
 
-  const { title } = useSelector((state: RootState) => state.navActiveChat);
+  const { title } = useSelector((state: RootState) => state.navBarActiveChat);
 
     return (
         <div className={`${styles.mainContainer} flex flex-col  bg-white`}>

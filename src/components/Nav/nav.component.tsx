@@ -13,8 +13,8 @@ import { setDetail } from '@/lib/features/AuthDetail/authDetailSlice';
 
 export default function Nav(): JSX.Element {
 
-    const title = useSelector((state: RootState) => state.navActiveChat.title);
-    const status = useSelector((state: RootState) => state.navActiveChat.status);
+    const title = useSelector((state: RootState) => state.navBarActiveChat.title);
+    const status = useSelector((state: RootState) => state.navBarActiveChat.status);
     const username = useSelector((state: RootState) => state.authDetail.username);
 
     const [dropDown, setDropDown] = useState(false);

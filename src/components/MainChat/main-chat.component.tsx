@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 export default function MainChat(): JSX.Element {
 
-    const { title } = useSelector((state: RootState) => state.navActiveChat);
+    const { title } = useSelector((state: RootState) => state.navBarActiveChat);
     const { token } = useSelector((state: RootState) => state.authDetail);
     
     const { messagesList, clientsOnline, ws, clearMessagesList, modifyMessageList } = useWebSocket();

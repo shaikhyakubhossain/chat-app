@@ -1,20 +1,20 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
 
-interface navActiveChatStateType {
+interface navBarActiveChatStateType {
     title: string | null,
     status: string | null,
     type: string | null
 }
 
-const initialState: navActiveChatStateType = {
+const initialState: navBarActiveChatStateType = {
     title: null,
     status: null,
     type: null,
 }
 
-export const navActiveChatSlice = createSlice({
-    name: "navActiveChat",
+export const navBarActiveChatSlice = createSlice({
+    name: "navBarActiveChat",
     initialState,
     reducers: {
         setTitle(state, action) {
@@ -29,6 +29,6 @@ export const navActiveChatSlice = createSlice({
     }
 });
 
-export const {setTitle, setStatus, setType} = navActiveChatSlice.actions;
+export const {setTitle, setStatus, setType} = navBarActiveChatSlice.actions;
 
-export default navActiveChatSlice.reducer;
+export default navBarActiveChatSlice.reducer;
