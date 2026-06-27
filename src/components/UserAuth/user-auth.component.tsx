@@ -23,6 +23,7 @@ export default function UserAuth(): JSX.Element {
   const [toast, setToast] = useState({ show: false, message: "" });
 
   const handleLoginOrSignUp = (dataToSend: dataToSendType) => {
+    setToast({ show: true, message: "Waking up the server..." });
     dispatch(setShowLoadingTrue());
       fetch(`${getUrl()}/${authType}`, {
         method: "POST",
@@ -47,6 +48,7 @@ export default function UserAuth(): JSX.Element {
         });
       })
       .catch((err) => {
+        setToast({ show: true, message: "Oops! Something went wrong!" });
         // console.log("err", err);
         dispatch(setShowLoadingFalse());
       });

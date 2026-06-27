@@ -17,7 +17,7 @@ export default function Toast(props: propsType) {
       }, 3000);
     }
     return () => clearTimeout(timer);
-  }, [props.show]);
+  }, [props]);
 
   return (
     <div
