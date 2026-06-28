@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import styles from './left-menu.module.scss';
 import ConversationCard from '../ConversationCard/conversation-card.component';
 import { getUrl } from '@/utils/urls';
@@ -44,7 +44,7 @@ export default function LeftMenu(): JSX.Element {
         })
     }
 
-    const setter = (item: string, event: React.MouseEvent<HTMLDivElement>) => {
+    const setter = useCallback((item: string, event: React.MouseEvent<HTMLDivElement>) => {
 
         customTW = '';
 
@@ -53,12 +53,12 @@ export default function LeftMenu(): JSX.Element {
         currentConversationCard?.classList.add("bg-gray-200");
 
         dispatch(setTitle(item));
-        dispatch(setStatus(item === "Public group chat" ? `${clientsOnline} Online` : "Offline"));
+        // dispatch(setStatus(item === "Public group chat" ? `${clientsOnline} Online` : "Offline"));
         dispatch(setType("personal"));
         dispatch(setTrue());
 
         prevConversationCard = currentConversationCard;
-    }
+    }, [dispatch, clientsOnline]);
 
     useEffect(() => {
         getFriends();

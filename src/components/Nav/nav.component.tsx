@@ -16,6 +16,7 @@ export default function Nav(): JSX.Element {
     const title = useSelector((state: RootState) => state.navBarActiveChat.title);
     const status = useSelector((state: RootState) => state.navBarActiveChat.status);
     const username = useSelector((state: RootState) => state.authDetail.username);
+    const clientsOnline = useSelector((state: RootState) => state.navBarActiveChat.clientsOnline);
 
     const [dropDown, setDropDown] = useState(false);
 
@@ -33,7 +34,7 @@ export default function Nav(): JSX.Element {
             {title && <ProfileImg title={title} />}
             <div className={`${styles.titleAndStatusContainer} ml-4`}>
                 <div className={`${styles.title} font-bold`}>{title}</div>
-                <div className={`${styles.status} text-slate-500`}>{status}</div>
+                <div className={`${styles.status} text-slate-500`}>{title === "Public group chat" ? title !== null ? `${clientsOnline} Online` : "Offline" : null}</div>
             </div>
         </div>
         <div className='flex relative'>
