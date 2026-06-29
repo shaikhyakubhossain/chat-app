@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 type webSocketDateType = {
   type: string;
@@ -11,8 +11,18 @@ type serverMessageType = { sentBy: string | undefined; message: string };
 
 const useWebSocket = () => {
   const [ws, setWs] = useState<WebSocket | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const [messagesList, setMessagesList] = useState<serverMessageType[]>([]);
   const [clientsOnline, setClientsOnline] = useState<string | undefined>("");
+
+  const sendData = useCallback((socket: WebSocket, dataType: string, data: string) => {
+    const messageData = {
+      type: dataType,
+      data: data,
+    };
+    socket.send(JSON.stringify(messageData));
+  }, []);
 
   let socket: WebSocket;
 
@@ -26,16 +36,25 @@ const useWebSocket = () => {
   }, []);
 
   const setupSocket = () => {
+    setLoading(true);
+    setError(null);
     const authDetail = localStorage.getItem("authDetail");
     socket = new WebSocket("wss://chat-app-backend-83vn.onrender.com/");
     // socket = new WebSocket("ws://localhost:4000");
     socket.onopen = () => {
       console.log("connected to server");
       setWs(socket);
+      setLoading(false);
       if (authDetail){
-        socket.send(JSON.stringify({ type: "auth", data: authDetail }));
+        sendData(socket, "auth", authDetail);
       }
     };
+
+     socket.onerror = (event) => {
+    console.error("WebSocket error", event);
+    setError("Failed to connect to server");
+    setLoading(false);
+  };
 
     socket.onmessage = (event) => {
       let data: webSocketDateType = JSON.parse(event.data);
@@ -51,15 +70,12 @@ const useWebSocket = () => {
 
     socket.onclose = () => {
       console.log("Disconnected from the server");
+      setLoading(false);
     };
   }
 
   const sendMessage = (message: string, messageType: string) => {
-    const messageData = {
-      type: messageType,
-      data: message,
-    };
-    socket.send(JSON.stringify(messageData));
+    sendData(socket, messageType, message);
   };
 
   const clearMessagesList = (): void => {
@@ -71,6 +87,8 @@ const useWebSocket = () => {
   };
 
   return {
+    loading,
+    error,
     ws,
     messagesList,
     clientsOnline,

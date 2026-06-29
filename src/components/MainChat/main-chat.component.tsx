@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import styles from './main-chat.module.scss';
 import ChatBox from "../ChatBox/chat-box.component";
 import MessageInput from "../MessageInput/message-input.component";
@@ -19,7 +19,7 @@ export default function MainChat(): JSX.Element {
     const { title } = useSelector((state: RootState) => state.navBarActiveChat);
     const { token } = useSelector((state: RootState) => state.authDetail);
     
-    const { messagesList, clientsOnline, ws, clearMessagesList, modifyMessageList } = useWebSocket();
+    const { messagesList, clientsOnline, ws, clearMessagesList, modifyMessageList, loading, error } = useWebSocket();
 
     const containerOfMessageOutputRef = useRef<null | HTMLDivElement>(null);
     const containerOfInputRef = useRef<null | HTMLDivElement>(null);
@@ -97,15 +97,22 @@ export default function MainChat(): JSX.Element {
         }
     }
 
+    const content = useMemo(() => {
+        if (loading) {
+            return <div className="mb-auto bg-lime-300 text-white text-center rounded p-2">Connecting to the server...</div>;
+        } else if (error) {
+            return <div className=" bg-red-300 text-white text-center rounded p-2">{error}</div>;
+        } else {
+            return <ChatBox serverMessage={messagesList} />;
+        }
+    }, [loading, error, ws, messagesList]);
+
     return (
         <div className={`${styles.mainContainer} mx-auto`} ref={containerOfMessageOutputRef}>
-            {/* <div>
-                    {title === "Public group chat" && clientsOnline && <span className="bg-slate-500 text-white rounded p-2 mx-2">{clientsOnline} online</span>}
-            </div> */}
-            {ws ? <ChatBox serverMessage={messagesList} /> : <div className="mb-auto bg-lime-600 text-white text-center rounded p-2">Connecting to the server...</div>}
+            {content}
             <div className='flex justify-center '>
                 <div ref={containerOfInputRef} className="w-3/4 mx-auto">
-                    <div className={`${styles.messageTooLongError} mb-auto bg-red-500 text-white rounded p-2`}>Message too long, max 150 characters</div>
+                    <div className={`${styles.messageTooLongError} mb-auto bg-red-300 text-white rounded p-2`}>Message too long, max 150 characters</div>
                     <MessageInput sendMessageFunction={sendMessage}/>
                 </div>
             </div>
